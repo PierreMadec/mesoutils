@@ -7,6 +7,7 @@ editor_options:
 
 ```{r development, include=FALSE}
 library(testthat)
+library(dplyr)
 ```
 
 <!--
@@ -55,7 +56,43 @@ test_that("get_info_data works", {
   expect_error(get_info_data("mydata"), "mydata is not a data frame")
 })
 ```
+ 
+# get_mean_data
+ 
+```{r development}
+iris |>  dplyr::summarise(
+  dplyr::across(is.numeric, mean)
+  )
+
+```
+ 
+    
+```{r function-get_mean_data}
+#' get_mean_data
+#' 
+#' créer une fonction qui permettra d’obtenir une table avec la moyenne de toutes les variables numériques de votre jeu de donnée en paramètre
+#'
+#' 
+#' @param df un dataframe
+#'
+#' @return une table
+#' 
+#' @export
+get_mean_data <- function(df) {
+  df |> dplyr::summarise(dplyr::across(is.numeric, mean))
+}
+```
   
+```{r example-get_mean_data}
+get_mean_data(iris)
+get_mean_data(mtcars)
+```
+  
+```{r tests-get_mean_data}
+test_that("get_mean_data works", {
+  expect_true(inherits(get_mean_data, "function")) 
+})
+```
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
