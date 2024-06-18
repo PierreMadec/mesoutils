@@ -18,30 +18,44 @@ library(testthat)
 pkgload::load_all(export_all = FALSE)
 ```
 
-# my_fun
+# get_info_data
 
-```{r function-my_fun}
-#' my_fun Title
+```{r development}
+list(nrow(iris), length(iris))
+length(iris)
+nrow(iris)
+names(iris)
+```
+    
+```{r function-get_info_data}
+#' get_info_data
+#' 
+#' @param df un dataframe
 #'
-#' @return 1
+#' @return une liste contenant le nombre de lignes et de colonnes du dataframe
+#' 
 #' @export
-#'
-#' @examples
-my_fun <- function() {
-  1
+get_info_data <- function(df) {
+  if (isFALSE(inherits(df, "data.frame")))  {
+    stop("mydata is not a data frame")
+  }
+  return(list(nrow(df), length(df), names(df)))
 }
 ```
+  
+```{r example-get_info_data}
+get_info_data(iris)
+get_info_data(mtcars)
 
-```{r examples-my_fun}
-my_fun()
 ```
-
-```{r tests-my_fun}
-test_that("my_fun works", {
-
+  
+```{r tests-get_info_data}
+test_that("get_info_data works", {
+  expect_true(inherits(get_info_data, "function")) 
+  expect_error(get_info_data("mydata"), "mydata is not a data frame")
 })
 ```
-
+  
 
 ```{r development-inflate, eval=FALSE}
 # Run but keep eval=FALSE to avoid infinite loop
