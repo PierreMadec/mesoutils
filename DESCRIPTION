@@ -6,6 +6,8 @@ Authors@R:
            comment = c(ORCID = "0000-0000-0000-0000"))
 Description: Construction d'un package avec mes outils.
 License: MIT + file LICENSE
+Imports: 
+    dplyr
 Suggests: 
     knitr,
     rmarkdown,

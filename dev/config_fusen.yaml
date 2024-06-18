@@ -1,8 +1,12 @@
 flat_minimal_package.Rmd:
   path: dev/flat_minimal_package.Rmd
   state: active
-  R: R/get_info_data.R
-  tests: tests/testthat/test-get_info_data.R
+  R:
+  - R/get_info_data.R
+  - R/get_mean_data.R
+  tests:
+  - tests/testthat/test-get_info_data.R
+  - tests/testthat/test-get_mean_data.R
   vignettes: vignettes/minimal.Rmd
   inflate:
     flat_file: dev/flat_minimal_package.Rmd
